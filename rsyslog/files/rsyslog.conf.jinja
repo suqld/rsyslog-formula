@@ -51,7 +51,7 @@ $Umask 0022
 #
 $IncludeConfig /etc/rsyslog.d/*.conf
 
-{% if grains['os_family'] == 'Redhat' %}
+{% if grains['os_family'] == 'RedHat' %}
 
 # Turn off message reception via local log socket;
 # local messages are retrieved through imjournal now.
