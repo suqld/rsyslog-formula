@@ -52,6 +52,12 @@ $FileCreateMode {{ config.get('filemode', '0640') }}
 $DirCreateMode {{ config.get('dirmode', '0755') }}
 $Umask 0022
 
+{% if config.logbasepath|default(false) %}
+# If we are logging for other servers, log that to files first
+$template DailyPerHostLogs,"{{ config.logbasepath }}/%HOSTNAME%_%FROMHOST-IP%.log"
+*.* -?DailyPerHostLogs
+{% endif %}
+
 #
 # Include all config files in /etc/rsyslog.d/
 #
@@ -77,7 +83,4 @@ $ActionQueueSaveOnShutdown on
 {% endfor %}
 {% endif %}
 
-{% if config.logbasepath|default(false) %}
-$template DailyPerHostLogs,"{{ config.logbasepath }}/%HOSTNAME%_%FROMHOST-IP%.log"
-*.* -?DailyPerHostLogs
-{% endif %}
+
