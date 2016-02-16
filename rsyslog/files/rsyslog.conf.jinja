@@ -78,6 +78,6 @@ $ActionQueueSaveOnShutdown on
 {% endif %}
 
 {% if config.logbasepath|default(false) %}
-$template DailyPerHostLogs,"{{ config.logbasepath }}/%HOSTNAME%-%FROMHOST-IP%/%$YEAR%/%$MONTH%/%$DAY%.log"
+$template DailyPerHostLogs,"{{ config.logbasepath }}/%HOSTNAME%_%FROMHOST-IP%.log"
 *.* -?DailyPerHostLogs
 {% endif %}
