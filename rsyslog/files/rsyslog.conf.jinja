@@ -46,11 +46,19 @@ $ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
 #
 # Set the default permissions for all log files.
 #
+{% if grains['os'] == 'Debian' %}
+$FileOwner syslog
+{% else %}
 $FileOwner root
+{% endif %}
 $FileGroup adm
 $FileCreateMode {{ config.get('filemode', '0640') }}
 $DirCreateMode {{ config.get('dirmode', '0755') }}
 $Umask 0022
+{% if grains['os'] == 'Debian' %}
+$PrivDropToUser syslog
+$PrivDropToGroup syslog
+{% endif %}
 
 {% if config.logbasepath|default(false) %}
 # If we are logging for other servers, log that to files first
