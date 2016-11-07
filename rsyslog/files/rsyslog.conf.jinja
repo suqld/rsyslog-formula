@@ -67,6 +67,11 @@ $template DailyPerHostLogs,"{{ config.logbasepath }}/%HOSTNAME%_%FROMHOST-IP%.lo
 {% endif %}
 
 #
+# Where to place spool and state files
+#
+$WorkDirectory /var/spool/rsyslog
+
+#
 # Include all config files in /etc/rsyslog.d/
 #
 $IncludeConfig /etc/rsyslog.d/*.conf
