@@ -15,22 +15,22 @@
 #### MODULES ####
 #################
 
-$ModLoad imuxsock # provides support for local system logging
+module(load="imuxsock") # provides support for local system logging
 {% if config.imkllog|default(true) %}
-$ModLoad imklog   # provides kernel logging support (previously done by rklogd)
+module(load="imklog")   # provides kernel logging support
 {% endif %}
-#$ModLoad immark  # provides --MARK-- message capability
+#module(load="immark")  # provides --MARK-- message capability
 
 {% if config.listenudp|default(false) %}
 # provides UDP syslog reception
-$ModLoad imudp
-$UDPServerRun 514
+module(load="imudp")
+input(type="imudp" port="514")
 {% endif %}
 
 {% if config.listentcp|default(false) %}
 # provides TCP syslog reception
-$ModLoad imtcp
-$InputTCPServerRun 514
+module(load="imtcp")
+input(type="imtcp" port="514")
 {% endif %}
 
 ###########################
