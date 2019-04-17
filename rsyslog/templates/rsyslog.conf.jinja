@@ -11,12 +11,12 @@
 {% if config.impstats|default(false) -%}
 # Enable impstats.This module MUST be loaded right at the top of rsyslog.conf, otherwise stats may not get turned on in all places.
 module(
-        load=impstats
-        interval={{ config.impstatsinterval|default('600') }}
-        severity={{ config.impstatsseverity|default('6') }}
-        resetCounters={{ config.impstatsresetcounters|default('off') }}
-        log.syslog={{ config.impstatslogsyslog|default('on') }}
-        format={{ config.impstatsformat|default('legacy') }}
+        load="impstats"
+        interval="{{ config.impstatsinterval|default('600') }}"
+        severity="{{ config.impstatsseverity|default('6') }}"
+        resetCounters="{{ config.impstatsresetcounters|default('off') }}"
+        log.syslog="{{ config.impstatslogsyslog|default('on') }}"
+        format="{{ config.impstatsformat|default('legacy') }}"
 )
 {% if config.impstatslogsyslog|default('off') == 'on' %}
 {{ config.impstatssyslogrule|default('syslog.=debug /var/log/rsyslog-stats') }}
