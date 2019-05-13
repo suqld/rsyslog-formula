@@ -19,7 +19,7 @@ rsyslog:
     - template: jinja
     - source: {{ rsyslog.custom_config_template }}
     - context:
-      config: {{ rsyslog|json }}
+        config: {{ rsyslog|json }}
   service.running:
     - enable: True
     - name: {{ rsyslog.service }}
