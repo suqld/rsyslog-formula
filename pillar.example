@@ -24,7 +24,7 @@ rsyslog:
   markmessageperiod: 1200                 # Specifies when mark messages are written (seconds)
   logbasepath: /mnt/logs                  # base path for logs to be saved to
                                           # also enables logging per host, per day
-  logdailypattern: %HOSTNAME%_%FROMHOST-IP%.log   # Sets a custom filename pattern for logging per host
+  logdailypattern: '%HOSTNAME%_%FROMHOST-IP%.log'   # Sets a custom filename pattern for logging per host
   fileowner: root                         # set the owner of the logfiles
   filegroup: root                         # set the group of the logfiles
   filemode: '0640'                        # mode for created log files
