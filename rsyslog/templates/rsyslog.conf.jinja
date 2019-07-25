@@ -53,10 +53,8 @@ input(type="imtcp" port="{{ config.listentcpprt|default('514') }}")
 #### GLOBAL DIRECTIVES ####
 ###########################
 
-{% if config.imjournal|default(false) -%}
 # Where to place auxiliary files
 $WorkDirectory {{ config.get('workdirectory', '/var/spool/rsyslog') }}
-{%- endif %}
 
 #
 # Use traditional timestamp format.
