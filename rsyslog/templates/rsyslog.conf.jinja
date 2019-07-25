@@ -84,6 +84,12 @@ $PrivDropToUser {{ config.get('priv_drop_to_user', config.get('fileowner', 'root
 $PrivDropToGroup {{ config.get('priv_drop_to_group', config.get('filegroup', 'adm'))}}
 {%- endif %}
 
+{% if config.logbasepath|default(false) %}
+# Before we do local logging, log daily per host logs
+$template DailyPerHostLogs,"{{ config.logbasepath }}/{{ config.logdailypattern|default('%HOSTNAME%-%FROMHOST-IP%/%$YEAR%/%$MONTH%/%$DAY%.log')}}"
+*.* -?DailyPerHostLogs
+{% endif %}
+
 #
 # Include all config files in /etc/rsyslog.d/
 #
@@ -109,10 +115,6 @@ $ActionQueueSaveOnShutdown on
 {% endfor %}
 {% endif %}
 
-{% if config.logbasepath|default(false) %}
-$template DailyPerHostLogs,"{{ config.logbasepath }}/%HOSTNAME%-%FROMHOST-IP%/%$YEAR%/%$MONTH%/%$DAY%.log"
-*.* -?DailyPerHostLogs
-{% endif %}
 
 {% if config.imjournal|default(false) -%}
 # Turn off message reception via local log socket;
