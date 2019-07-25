@@ -8,3 +8,6 @@ FreeBSD:
 Gentoo:
   rungroup: adm
   package: app-admin/rsyslog
+Debian:
+  runuser: syslog
+  rungroup: adm
